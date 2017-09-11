@@ -7,16 +7,13 @@ from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from cmsplugin_simple_markdown.models import SimpleMarkdownPlugin
 from cms.utils.page_resolver import get_page_from_path
-from django_markdown.widgets import MarkdownWidget
 
 
 class SimpleMarkdownCMSPluginForm(forms.ModelForm):
 
     class Meta:
         model = SimpleMarkdownPlugin
-        widgets = {
-            'markdown_text': MarkdownWidget
-        }
+        fields = '__all__'
 
 
 class SimpleMarkdownCMSPlugin(CMSPluginBase):

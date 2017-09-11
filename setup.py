@@ -8,7 +8,7 @@ setup(
     package_data={'cmsplugin_simple_markdown': ['templates/*/*']},
     install_requires=[
         'django',
-        'django-markdown-duex',
+        'django-markdown-deux',
         'django-cms'
     ],
     url='https://www.github.com/Alir3z4/cmsplugin-simple-markdown',

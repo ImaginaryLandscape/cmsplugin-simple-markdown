@@ -1,4 +1,12 @@
 =========================
+NOTE
+=========================
+
+This is a fork intended to make some duct tape quality fixes for newer versions of Django as an interim solution in an effort to upgrade a live site.
+I don't recommend you use this if possible. In an ideal world, we would switch to/develop a new plugin, but time didn't permit.
+
+
+=========================
 cmsplugin-simple-markdown
 =========================
 .. contents:: Table of contents

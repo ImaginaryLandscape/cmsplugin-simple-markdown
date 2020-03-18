@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SimpleMarkdownPlugin',
             fields=[
-                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin')),
+                ('cmsplugin_ptr', models.OneToOneField(parent_link=True, auto_created=True, primary_key=True, serialize=False, to='cms.CMSPlugin', on_delete=models.CASCADE)),
                 ('markdown_text', models.TextField(verbose_name='text')),
                 ('template', models.CharField(default=b'cmsplugin_simple_markdown/simple_markdown.html', verbose_name='template', max_length=255, editable=False, choices=[(b'cmsplugin_simple_markdown/simple_markdown.html', b'simple_markdown.html')])),
             ],

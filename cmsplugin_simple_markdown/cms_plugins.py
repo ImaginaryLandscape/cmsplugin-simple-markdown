@@ -6,7 +6,10 @@ from django.utils.translation import ugettext_lazy as _
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from cmsplugin_simple_markdown.models import SimpleMarkdownPlugin
-from cms.utils.page_resolver import get_page_from_path
+try:
+    from cms.utils import page_resolver as page  # CMS < 3.5 has 'page_resolver.get_page_from_path'
+except ImportError:
+    from cms.utils import page  # CMS >= 3.5 has 'page.get_page_from_path'
 
 
 class SimpleMarkdownCMSPluginForm(forms.ModelForm):
@@ -25,9 +28,9 @@ class SimpleMarkdownCMSPlugin(CMSPluginBase):
 
     def replace_links(self, markdown_text):
         def link_repl(match):
-            page = get_page_from_path(match.group(1))
-            if page:
-                return "(" + page.get_absolute_url() + ")"
+            cms_page = page.get_page_from_path(match.group(1))
+            if cms_page:
+                return "(" + cms_page.get_absolute_url() + ")"
             else:
                 return "(#" + match.group(1) + ")"
 

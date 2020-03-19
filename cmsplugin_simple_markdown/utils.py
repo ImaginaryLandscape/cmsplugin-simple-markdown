@@ -2,6 +2,7 @@ import glob
 import os
 import threading
 from django.conf import settings
+from django.template.loaders.app_directories import get_app_template_dirs
 
 localdata = threading.local()
 localdata.TEMPLATES = tuple()
@@ -33,24 +34,27 @@ def autodiscover_templates():
 
     templates = []
 
-    dirs_to_scan = []
-    if ('django.template.loaders.app_directories.Loader' in
-            settings.TEMPLATE_LOADERS):
-        for app in settings.INSTALLED_APPS:
-            _ = __import__(app)
-            tdir = os.path.dirname(_.__file__)
-            if not tdir in dirs_to_scan:
-                # Append `templates` for app directories
-                dirs_to_scan.append(os.path.join(tdir, 'templates'))
-
-    if ('django.template.loaders.filesystem.Loader' in
-            settings.TEMPLATE_LOADERS):
-        for tdir in settings.TEMPLATE_DIRS:
-            if not tdir in dirs_to_scan:
-                # File-System loader assumes our templates in
-                # `templates` already.
-                dirs_to_scan.append(tdir)
-
+# This was the old method back when "TEMPLATE_LOADERS" was a setting.
+# I think the new method below accomplishes the same, but leaving these
+# commented-out lines for now as a reference. - NTT
+#    dirs_to_scan = []
+#    if ('django.template.loaders.app_directories.Loader' in
+#            settings.TEMPLATE_LOADERS):
+#        for app in settings.INSTALLED_APPS:
+#            _ = __import__(app)
+#            tdir = os.path.dirname(_.__file__)
+#            if not tdir in dirs_to_scan:
+#                # Append `templates` for app directories
+#                dirs_to_scan.append(os.path.join(tdir, 'templates'))
+#
+#    if ('django.template.loaders.filesystem.Loader' in
+#            settings.TEMPLATE_LOADERS):
+#        for tdir in settings.TEMPLATE_DIRS:
+#            if not tdir in dirs_to_scan:
+#                # File-System loader assumes our templates in
+#                # `templates` already.
+#                dirs_to_scan.append(tdir)
+    dirs_to_scan = list(get_app_template_dirs("templates")) + settings.TEMPLATES[0]['DIRS']
     for tdir in dirs_to_scan:
         found = glob.glob(os.path.join(tdir, 'cmsplugin_simple_markdown/*.html'))
         for tfile in found:

@@ -73,12 +73,6 @@ Extract the archive, and run the following command in root directory of cmsplugi
 
     $ python setup.py install
 
-Configuration
-==============
-
-Most people say that installation of ``cmsplugin-simple-markdown`` is easy, it seems they're out of space.
-It's fucking hard to install.
-
 Configuration & Usage
 ----------------------
 
@@ -89,18 +83,3 @@ Configuration & Usage
 4. Create the database tables::
 
     $ python manage.py migrate
-
-
-This is not easy, It's hard, confusing. I doubt, double doubt that those people that keep saying installing this
-is easy are on something.
-
-
-Drama story
-===========
-Since every application won't begins with love, this plugin has been developed to solve a problem.
-2 days back, I've been using **cms.plugin.text** for handling html pages and related content,
-but when I've tried to use AWS S3/CloudFront for my static files, I got stuck with ``CORS`` problem.
-So I've develop ``cmsplugin-simple-markdown`` to be used without any dependencies on JavaScript or CSS files.
-
-Now these days, people all around the world are using it, They are happy with it, They go crazy with ``cmsplugin-simple-markdown``,
-even they name their child ``cmsplugin-simple-markdown``, at least I did. ;)
